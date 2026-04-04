@@ -7,18 +7,16 @@ test_videos/
 .idea/
 yolov8n.pt
 
-# large / raw dataset contents
-datasets/farm_dataset/
+# datasets to ignore
 datasets/cow/
 datasets/goat/
 datasets/horse/
 datasets/sheep/
 datasets/v1_240507/
+datasets/farm_dataset/images/
+datasets/farm_dataset/labels/
 datasets/*.zip
 
-# accidental unrelated folders
-OneDrive/
-NetBeansProjects/
-src/
+# other large/unneeded files
 archive.zip
 v1_240507.zip
