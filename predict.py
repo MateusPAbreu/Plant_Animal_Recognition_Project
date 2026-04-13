@@ -2,7 +2,7 @@ from ultralytics import YOLO
 from pathlib import Path
 
 MODEL_PATH = r"C:\Users\david\runs\detect\agriguard_chicken_model_v2\weights\best.pt"
-IMAGE_FOLDER = "test_images"
+IMAGE_FOLDER = "test"
 
 def main():
     model = YOLO(MODEL_PATH)
@@ -19,8 +19,8 @@ def main():
 
     for result in results:
         image_name = Path(result.path).name
-        chicken_count = len(result.boxes) if result.boxes is not None else 0
-        print(f"{image_name}: {chicken_count} chicken(s) detected")
+        weed_count = len(result.boxes) if result.boxes is not None else 0
+        print(f"{image_name}: {weed_count} Weed(s) detected")
 
     print("-" * 50)
     print("Prediction complete.")
