@@ -1,7 +1,8 @@
-path: datasets/farm_dataset
+path: datasets/weed_dataset
 train: images/train
 val: images/val
 test: images/test
 
 names:
-  0: chicken
+  0: crop
+  1: weed
