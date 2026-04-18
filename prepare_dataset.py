@@ -6,8 +6,8 @@ import cv2
 # -----------------------------
 # CONFIG
 # -----------------------------
-SOURCE_IMAGES = Path("datasets/v1_240507/images")
-SOURCE_MASKS = Path("datasets/v1_240507/masks")
+SOURCE_IMAGES = Path("datasets/cow_dataset/images")
+#SOURCE_MASKS = Path("datasets/v1_240507/masks")
 
 TARGET_ROOT = Path("datasets/farm_dataset")
 TRAIN_IMG = TARGET_ROOT / "images" / "train"
@@ -18,7 +18,7 @@ TRAIN_LBL = TARGET_ROOT / "labels" / "train"
 VAL_LBL = TARGET_ROOT / "labels" / "val"
 TEST_LBL = TARGET_ROOT / "labels" / "test"
 
-CLASS_ID = 0  # chicken
+CLASS_ID = 0  # cow
 
 TRAIN_RATIO = 0.7
 VAL_RATIO = 0.2
@@ -33,12 +33,12 @@ def ensure_dirs():
         folder.mkdir(parents=True, exist_ok=True)
 
 
-def yolo_bbox_from_mask(mask_path, img_width, img_height):
+def yolo_bbox_from_mask(img_width, img_height):
     """
     Read a binary instance mask and convert nonzero pixels to YOLO bbox.
     Returns: (x_center, y_center, width, height) normalized, or None if empty.
     """
-    mask = cv2.imread(str(mask_path), cv2.IMREAD_GRAYSCALE)
+    mask = cv2.imread(cv2.IMREAD_GRAYSCALE)
     if mask is None:
         return None
 
@@ -74,7 +74,7 @@ def find_instance_masks_for_image(image_name):
     """
     stem = Path(image_name).stem
     pattern = f"{stem}_instanceMask*.png"
-    return sorted(SOURCE_MASKS.glob(pattern))
+    return sorted(SOURCE_IMAGES.glob(pattern))
 
 
 def process_image(image_path, img_dest, lbl_dest):
@@ -88,7 +88,7 @@ def process_image(image_path, img_dest, lbl_dest):
 
     label_lines = []
     for mask_path in masks:
-        bbox = yolo_bbox_from_mask(mask_path, w, h)
+        bbox = yolo_bbox_from_mask(w, h)
         if bbox is None:
             continue
 
@@ -137,15 +137,15 @@ def main():
     success_test = 0
 
     for img in train_files:
-        if process_image(img, TRAIN_IMG, TRAIN_LBL):
+        if process_image(img, TRAIN_IMG):
             success_train += 1
 
     for img in val_files:
-        if process_image(img, VAL_IMG, VAL_LBL):
+        if process_image(img, VAL_IMG):
             success_val += 1
 
     for img in test_files:
-        if process_image(img, TEST_IMG, TEST_LBL):
+        if process_image(img, TEST_IMG):
             success_test += 1
 
     print("\nDone.")

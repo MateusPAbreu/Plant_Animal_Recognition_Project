@@ -2,7 +2,7 @@ from pathlib import Path
 import shutil
 
 NEG_ROOT = Path("negative_images")
-DATASET_ROOT = Path("datasets/farm_dataset")
+DATASET_ROOT = Path("datasets/cow_dataset")
 
 SPLITS = ["train", "val", "test"]
 

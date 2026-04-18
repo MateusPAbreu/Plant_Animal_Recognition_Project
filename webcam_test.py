@@ -1,7 +1,7 @@
 from ultralytics import YOLO
 import cv2
 
-MODEL_PATH = r"C:\Users\david\runs\detect\agriguard_chicken_model_v2\weights\best.pt"
+MODEL_PATH = r"C:\Users\ashla\Documents\UNBC\CPSC 371\Prodj\Plant_Animal_Recognition_Project\runs\detect\agriguard_cow_model_v1\weights\best.pt"
 CAMERA_INDEX = 0
 
 def main():
