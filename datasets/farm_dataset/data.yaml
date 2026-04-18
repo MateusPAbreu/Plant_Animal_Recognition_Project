@@ -1,7 +1,17 @@
+# Main dataset folder
 path: datasets/farm_dataset
+
+# Training images
 train: images/train
+
+# Validation images
 val: images/val
+
+# Test images
 test: images/test
 
+# Class names used by the model
 names:
   0: chicken
+  1: crop
+  2: weed
